@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct FileLocationChangeSubView: View {
-    @EnvironmentObject var fileSelectorChangeLocationVM:FileSelectorViewModel
+struct FileLocationChangeSubView<VM>: View where VM:FileSelectorViewModel {
+    @StateObject var fileSelectorChangeLocationVM:FileSelectorViewModel
     @State var title:String = ""
     @Binding var fileLocation:String
     var body: some View {
@@ -39,6 +39,6 @@ struct FileLocationChangeSubView: View {
 
 struct FileLocationChangeSubView_Previews: PreviewProvider {
     static var previews: some View {
-        FileLocationChangeSubView(fileLocation: .constant(""))
+        FileLocationChangeSubView(fileSelectorChangeLocationVM: FileSelectorViewModel(), fileLocation: .constant(""))
     }
 }

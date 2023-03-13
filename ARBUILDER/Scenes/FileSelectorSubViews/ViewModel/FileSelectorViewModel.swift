@@ -15,12 +15,12 @@ protocol FileSelectorViewModelProtocol:ObservableObject{
 }
 class FileSelectorViewModel:FileSelectorViewModelProtocol{
     @Published var fileLocation:String = ""
-    @Published var fileFormat:UTType? = .usd
+    @Published var fileFormat:UTType?
     @Published var panelRequesterManager:(any FileSelectorDProtocol)?
     init(panelRequesterManager: (any FileSelectorDProtocol)? = nil) {
         self.panelRequesterManager = panelRequesterManager
     }
-    func requestOpenPanel()  {
+    func requestOpenPanel() {
         panelRequesterManager?.pickFile(completion: { [weak self] fileURL,format  in
             self?.fileLocation = fileURL
             if let formatType = format {

@@ -10,7 +10,7 @@ import SceneKit
 import RealityKit
 import UniformTypeIdentifiers
 struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
-    @EnvironmentObject var fileSelectorVM:FileSelectorViewModel
+    @StateObject var fileSelectorVM:FileSelectorViewModel
     @State var fileLocation:String = ""
     @State var showAlert:Bool = false
     @StateObject var viewVM:VM
@@ -21,13 +21,13 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
             ZStack(){
                     VStack(spacing:20) {
                         HStack(alignment:.bottom){
-                            fileSelectorSubView(title: "Select Model Location", fileLocation: $fileLocation, fileFormat: $fileSelectorVM.fileFormat)
+                            fileSelectorSubView(title: "Select Model Location", fileLocation: $fileLocation, fileFormat: $fileSelectorVM.fileFormat, fileSelectorVM: fileSelectorVM)
                             
                         }
                                             
                         Button {
-                            if fileSelectorVM.fileLocation != "" {
-                                viewVM.readSavedARModel(fileLocation: fileSelectorVM.fileLocation, type: fileSelectorVM.fileFormat ?? .usdz)
+                            if fileSelectorVM.fileLocation != "" && fileSelectorVM.fileFormat != nil {
+                                viewVM.readSavedARModel(fileLocation: fileSelectorVM.fileLocation, type: fileSelectorVM.fileFormat ?? .fileURL)
                             } else {
                                 showAlert = true
                             }
@@ -86,7 +86,7 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
 
 struct ARViewerView_Previews: PreviewProvider {
     static var previews: some View {
-        ARViewerView(viewVM: ARViewerViewModel())
+        ARViewerView(fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder)), viewVM: ARViewerViewModel())
     }
 }
 

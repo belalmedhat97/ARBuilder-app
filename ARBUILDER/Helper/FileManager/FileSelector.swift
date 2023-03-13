@@ -64,9 +64,12 @@ class FileSelectorDependecy:FileSelectorDProtocol{
                 let selectedPath = self.myFileOpener.url!.path
                 print(selectedPath)
                 if self.typeOfFile == .file {
-                    let fileType = UTType(filenameExtension: self.myFileOpener.url?.pathExtension ?? "")
-                    self.fileExtension = fileType ?? .usdz
-                    completion(selectedPath, self.fileExtension)
+                    if let fileType = UTType(filenameExtension: self.myFileOpener.url?.pathExtension ?? "") {
+                        self.fileExtension = fileType
+                        completion(selectedPath, self.fileExtension)
+                    }else{
+                        completion(selectedPath, nil)
+                    }
                 }else if self.typeOfFile ==  .folder {
                     completion(selectedPath, nil)
 
