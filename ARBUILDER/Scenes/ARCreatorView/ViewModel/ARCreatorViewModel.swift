@@ -54,7 +54,7 @@ import SceneKit
      
      func readSavedARModel(fileSavedLocation:String,fileLocation:String) {
          do{
-             cameraNode?.scale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
+             cameraNode?.scale = SCNVector3(x: 0.3, y: 0.3, z: 0.3)
              scene = try SCNScene(url: URL(string: "\(fileSavedLocation == "" ? fileLocation:fileSavedLocation)/NewObject.usdz")!)
          }catch let error{
              print(error.localizedDescription)

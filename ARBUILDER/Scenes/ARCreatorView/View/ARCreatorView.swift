@@ -9,10 +9,9 @@ import SwiftUI
 import SceneKit
 import RealityKit
 struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
-    @EnvironmentObject var fileSelectorVM:FileSelectorViewModel
     
-//    @StateObject var fileSelectorChangeLocationVMFolder = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder))
-
+    @StateObject var fileSelectorVM:FileSelectorViewModel
+    @StateObject var fileChangeLocationVM:FileSelectorViewModel
     @State var fileLocation:String = ""
     @State var fileSaveLocation:String = ""
     @State var changeDestination:Bool = false
@@ -27,13 +26,13 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
                 if checkPhotoGrammerty() == true {
                     VStack(spacing:20) {
                         HStack(alignment:.bottom){
-                            fileSelectorSubView(title: "Select Folder Location", fileLocation: $fileLocation, fileFormat: $fileSelectorVM.fileFormat)
+                            fileSelectorSubView(title: "Select Folder Location", fileLocation: $fileLocation, fileFormat: $fileSelectorVM.fileFormat, fileSelectorVM: fileSelectorVM)
+                            if changeDestination {
+                                FileLocationChangeSubView(fileSelectorChangeLocationVM: fileChangeLocationVM, title: "Select Save Destination Location", fileLocation: $fileChangeLocationVM.fileLocation)
+                            }
                             
                         }
                         if fileSelectorVM.fileLocation != "" {
-                            if changeDestination {
-                                FileLocationChangeSubView(title: "Select Save Destination Location", fileLocation: $fileSaveLocation).padding(.top,30)
-                            }
                             HStack(spacing:10){
                                 Text("Hint: the default save destination location is where you select the folder containg images, you can change it").foregroundColor(.black).opacity(0.5)
                                 Button {
@@ -50,6 +49,7 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
                         
                         Button {
                             if fileSelectorVM.fileLocation != "" && generateButtonTxt == "Generate" {
+                                changeDestination.toggle()
                                 viewVM.generate3DObject(file: fileSelectorVM.fileLocation, suggestedFileName: "NewObject", savedLocation: fileSaveLocation == "" ? fileSelectorVM.fileLocation:fileSaveLocation)
 
                             }
@@ -127,7 +127,7 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
 
 struct ARCreatorView_Previews: PreviewProvider {
     static var previews: some View {
-        ARCreatorView(viewVM: ARCreatorViewModel(objectRequesterManager: ObjectCaptureRequester()))
+        ARCreatorView(fileSelectorVM: FileSelectorViewModel(),fileChangeLocationVM: FileSelectorViewModel(),viewVM: ARCreatorViewModel(objectRequesterManager: ObjectCaptureRequester()))
     }
 }
 

@@ -8,12 +8,12 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct fileSelectorSubView: View {
+struct fileSelectorSubView<VM>: View where VM:FileSelectorViewModel{
     
     @State var title:String = ""
     @Binding var fileLocation:String
     @Binding var fileFormat:UTType?
-    @EnvironmentObject var fileSelectorVM:FileSelectorViewModel
+    @StateObject var fileSelectorVM:VM
 
     var body: some View {
         VStack(spacing:5){
@@ -44,7 +44,7 @@ struct fileSelectorSubView: View {
 
 struct fileAdderSubView_Previews: PreviewProvider {
     static var previews: some View {
-        fileSelectorSubView(fileLocation: .constant(""), fileFormat: .constant(.usdz))
+        fileSelectorSubView(fileLocation: .constant(""), fileFormat: .constant(.usdz), fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder)))
     }
 }
 

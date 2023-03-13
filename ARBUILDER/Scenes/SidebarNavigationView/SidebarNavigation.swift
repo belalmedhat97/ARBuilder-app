@@ -19,6 +19,8 @@ struct SidebarNavigation: View {
     var creatorVM = ARCreatorViewModel(objectRequesterManager: ObjectCaptureRequester())
     @StateObject var fileSelectorVMFile = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .file))
     @StateObject var fileSelectorVMFolder = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder))
+    @StateObject var fileSelectorChangeLocationVM = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder))
+
 
     var body: some View {
         List(selection: $selection) {
@@ -41,8 +43,8 @@ struct SidebarNavigation: View {
     }
     @ViewBuilder func goToDestination(view:screenName) -> some View {
          switch view {
-         case .creator:  ARCreatorView(viewVM: creatorVM).environmentObject(fileSelectorVMFolder)
-         case .viewer:  ARViewerView(viewVM: viewerVM).environmentObject(fileSelectorVMFile)
+         case .creator:  ARCreatorView(fileSelectorVM: fileSelectorVMFolder,fileChangeLocationVM: fileSelectorChangeLocationVM,viewVM: creatorVM)
+         case .viewer:  ARViewerView(fileSelectorVM: fileSelectorVMFile, viewVM: viewerVM)
          }
      }
 }
