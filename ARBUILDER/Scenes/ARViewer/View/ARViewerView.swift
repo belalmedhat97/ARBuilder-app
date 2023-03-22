@@ -28,6 +28,7 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
                         Button {
                             if fileSelectorVM.fileLocation != "" && fileSelectorVM.fileFormat != nil {
                                 viewVM.readSavedARModel(fileLocation: fileSelectorVM.fileLocation, type: fileSelectorVM.fileFormat ?? .fileURL)
+                                
                             } else {
                                 showAlert = true
                             }
@@ -44,7 +45,6 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
                                     if fileSelectorVM.fileFormat == .realityFile {
                                         ARViewContainer(url: fileSelectorVM.fileLocation, didPressLoad: $viewVM.didPressLoad, viewDidDisapper: $viewDidDisappear).ignoresSafeArea()
                                     }else{
-                                        
                                         SceneView(
                                             scene: viewVM.scene,
                                             pointOfView: viewVM.cameraNode,

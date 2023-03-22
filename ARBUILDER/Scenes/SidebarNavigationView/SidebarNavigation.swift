@@ -7,14 +7,14 @@
 
 import SwiftUI
 import SceneKit
-enum screenName: String,Identifiable,CaseIterable  {
+enum screenType: String,Identifiable,CaseIterable  {
     var id : String { UUID().uuidString }
     case creator = "AR Creator"
     case viewer = "AR Viewer"
 
 }
 struct SidebarNavigation: View {
-    @State var selection = Set<screenName>()
+    @State var selection = Set<screenType>()
     var viewerVM = ARViewerViewModel()
     var creatorVM = ARCreatorViewModel(objectRequesterManager: ObjectCaptureRequester())
     @StateObject var fileSelectorVMFile = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .file))
@@ -24,7 +24,7 @@ struct SidebarNavigation: View {
 
     var body: some View {
         List(selection: $selection) {
-            ForEach(screenName.allCases,id:
+            ForEach(screenType.allCases,id:
                         \.self) { view in
                 NavigationLink(view.rawValue) {
                     
@@ -41,7 +41,7 @@ struct SidebarNavigation: View {
             }
         }
     }
-    @ViewBuilder func goToDestination(view:screenName) -> some View {
+    @ViewBuilder func goToDestination(view:screenType) -> some View {
          switch view {
          case .creator:  ARCreatorView(fileSelectorVM: fileSelectorVMFolder,fileChangeLocationVM: fileSelectorChangeLocationVM,viewVM: creatorVM)
          case .viewer:  ARViewerView(fileSelectorVM: fileSelectorVMFile, viewVM: viewerVM)

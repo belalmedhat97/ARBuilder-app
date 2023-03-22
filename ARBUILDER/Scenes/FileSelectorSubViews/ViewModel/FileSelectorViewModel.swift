@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import Combine
 import UniformTypeIdentifiers
 protocol FileSelectorViewModelProtocol:ObservableObject{
     var fileLocation:String {get set}
     var fileFormat:UTType? {get set}
-    func requestOpenPanel() 
+    func requestOpenPanel()
 }
 class FileSelectorViewModel:FileSelectorViewModelProtocol{
     @Published var fileLocation:String = ""

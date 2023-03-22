@@ -7,7 +7,7 @@
 
 import SwiftUI
 @main
-struct ARBUILDERApp: App {
+struct ARBuilderMain: App {
 
     var body: some Scene {
         WindowGroup {

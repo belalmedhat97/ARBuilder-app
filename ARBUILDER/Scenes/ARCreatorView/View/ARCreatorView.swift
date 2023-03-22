@@ -16,25 +16,23 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
     @State var fileSaveLocation:String = ""
     @State var changeDestination:Bool = false
     @State var generateButtonTxt:String = "Generate"
-    @State var fileAfterSaving:URL?
-    @State var trimPercantage:CGFloat = 0.0
-    @State var suggestedFileNames:String = "MyName"
+    @State var hideChangeLocationView:Bool = false
     @StateObject var viewVM:VM
     var body: some View {
         GeometryReader { geo in
             ZStack(){
-                if checkPhotoGrammerty() == true {
+                if photoGrammertyEnabled() {
                     VStack(spacing:20) {
                         HStack(alignment:.bottom){
                             fileSelectorSubView(title: "Select Folder Location", fileLocation: $fileLocation, fileFormat: $fileSelectorVM.fileFormat, fileSelectorVM: fileSelectorVM)
                             if changeDestination {
-                                FileLocationChangeSubView(fileSelectorChangeLocationVM: fileChangeLocationVM, title: "Select Save Destination Location", fileLocation: $fileChangeLocationVM.fileLocation)
+                                fileSelectorSubView(title: "Select Model Location", fileLocation: $fileChangeLocationVM.fileLocation, fileFormat: $fileSelectorVM.fileFormat, fileSelectorVM: fileChangeLocationVM)
                             }
                             
                         }
-                        if fileSelectorVM.fileLocation != "" {
+                        if fileSelectorVM.fileLocation != "" && hideChangeLocationView == false {
                             HStack(spacing:10){
-                                Text("Hint: the default save destination location is where you select the folder containg images, you can change it").foregroundColor(.black).opacity(0.5)
+                                Text("Hint: the default save destination location is where you select the folder containing images, you can change it").foregroundColor(.black).opacity(0.5)
                                 Button {
                                     changeDestination.toggle()
                                     
@@ -49,14 +47,17 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
                         
                         Button {
                             if fileSelectorVM.fileLocation != "" && generateButtonTxt == "Generate" {
-                                changeDestination.toggle()
+                                if changeDestination {
+                                    changeDestination.toggle()
+                                }
+                                hideChangeLocationView = true
                                 viewVM.generate3DObject(file: fileSelectorVM.fileLocation, suggestedFileName: "NewObject", savedLocation: fileSaveLocation == "" ? fileSelectorVM.fileLocation:fileSaveLocation)
 
                             }
                         } label: {
                             ZStack(alignment:.leading){
 
-                                LeftToRightFillShape(progress: trimPercantage).frame(width: 130, height: 40, alignment: .center).cornerRadius(20)
+                                LeftToRightFillShape(progress: CGFloat(viewVM.percantage)).frame(width: 130, height: 40, alignment: .center).cornerRadius(20)
                                 Text(generateButtonTxt).frame(width: 130, height: 40, alignment: .center).foregroundColor(Color.black).bold()
                             }
 
@@ -81,15 +82,11 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
             }.frame(width: geo.size.width,height: geo.size.height,alignment: .center).onChange(of: viewVM.percantage) { newValue in
                 print("percantage value")
                 let progress = Int((newValue/1)*100)
-                withAnimation {
-                    trimPercantage = CGFloat(newValue)
-                }
                 generateButtonTxt = "\(progress) % Loading"
                 if progress == 100 {
                     generateButtonTxt = "Completed"
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5){
                         generateButtonTxt = "Generate"
-                            trimPercantage = 0.0
                     }
 
                 }
@@ -99,10 +96,11 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
             viewVM.setCameraNode()
             if viewVM.percantage != 0.0 {
                 let progress = Int((viewVM.percantage/1)*100)
-                withAnimation {
-                    trimPercantage = CGFloat(viewVM.percantage)
-                }
                 generateButtonTxt = "\(progress) % Loading"
+            }
+            if viewVM.didFileSaved == false  {
+                hideChangeLocationView = true
+
             }
         }.alert(viewVM.message, isPresented: $viewVM.showAlert) {
             // add buttons here
@@ -113,9 +111,11 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
             Text("")
         }.onChange(of: viewVM.didFileSaved) { newValue in
             viewVM.readSavedARModel(fileSavedLocation: fileSaveLocation, fileLocation: fileLocation)
+        }.onChange(of: fileSelectorVM.fileLocation) { newValue in
+            hideChangeLocationView = false
         }
     }
-    func checkPhotoGrammerty() -> Bool {
+    func photoGrammertyEnabled() -> Bool {
         guard PhotogrammetrySession.isSupported else {
             return false
             // Inform user and don't proceed with reconstruction.
