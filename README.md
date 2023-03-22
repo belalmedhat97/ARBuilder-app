@@ -37,7 +37,7 @@ a macOS app that creates AR models using apple object capture API (Photogrammetr
  
 > select the file location of the AR model and then select load 
 
-![ARReader](ARReader.png)
+![ARReader](images/ARReader.png)
 
 | Supported File Format for Viewer |
 | :-----------: |
