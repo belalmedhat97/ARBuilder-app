@@ -14,48 +14,37 @@ enum FileType{
 }
 protocol FileSelectorDProtocol{
     func pickFile(completion:@escaping(_ filePath:String, _ fileForamt: UTType?)->())
-//    var fileDataImage:NSImage {get}
 }
 class FileSelectorDependecy:FileSelectorDProtocol{
-//    @Published var fileDataImage: NSImage = NSImage(named: "white")!
     
     private let myFileOpener = NSOpenPanel()
     private let typeOfFile:FileType!
     var fileExtension:UTType = .usdz
     init(fType:FileType){
-        // define button select text
         typeOfFile = fType
-        let TypeText = fType == .image ? "Image":"File"
-        myFileOpener.prompt = "Select \(TypeText)"
-        
         myFileOpener.worksWhenModal = true
-        myFileOpener.canCreateDirectories = true
-        myFileOpener.canChooseDirectories = true
         myFileOpener.allowsMultipleSelection = false
-        
-        // define the files types allowed for upload
         switch fType {
         case .file:
+            myFileOpener.prompt = "Select File"
             myFileOpener.allowsOtherFileTypes = true
             myFileOpener.allowedContentTypes = [.usdz,.realityFile,.usd,.sceneKitScene]
             myFileOpener.canChooseFiles = true
+            myFileOpener.canChooseDirectories = false
 
         case .image:
                 myFileOpener.allowedContentTypes = [.png,.jpeg,.gif,.bmp]
         default:
-//            myFileOpener.allowsOtherFileTypes = true
+            myFileOpener.prompt = "Select Folder"
+            myFileOpener.canChooseDirectories = true
+            myFileOpener.canCreateDirectories = true
             myFileOpener.canChooseFiles = false
+            myFileOpener.nameFieldStringValue = "New Object"
+            myFileOpener.nameFieldLabel = "File Name"
+            
 
 
         }
-//        if fType == .file {
-//            myFileOpener.allowsOtherFileTypes = true
-//            myFileOpener.allowedContentTypes = [.usdz,.realityFile,.usd]
-//
-//        }else{
-//            myFileOpener.allowedContentTypes = [.png,.jpeg,.gif,.bmp]
-//
-//        }
     }
     func pickFile(completion:@escaping(_ filePath:String, _ fileForamt: UTType?)->()) {
         
@@ -72,11 +61,6 @@ class FileSelectorDependecy:FileSelectorDProtocol{
                     }
                 }else if self.typeOfFile ==  .folder {
                     completion(selectedPath, nil)
-
-//                    return ""
-//                    self.fileDataImage = NSImage(contentsOfFile:selectedPath)!
-                }else{
-                    
                 }
                 
             }
@@ -86,8 +70,6 @@ class FileSelectorDependecy:FileSelectorDProtocol{
     }
     deinit {
         print("release memory")
-//        fileDataFile = ""
-//        fileDataImage = NSImage(named: "white")!
     }
     
 }
