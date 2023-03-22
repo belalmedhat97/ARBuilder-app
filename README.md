@@ -24,13 +24,14 @@ a macOS app that creates AR models using apple object capture API (Photogrammetr
  - firstly 
 > select the folder where all the images of the object you want to create AR for it and the folder must contain only images to make it work after that press the (Generate) Button and the app will try to generate the AR model with a loading indicator 
 
-![ARCreationProcess](ARCreationProcess.png)
+![ARCreationProcess](images/ARCreationProcess.png)
 
-![ARCreatorCompletion](ARCreatorCompletion.png)
+![ARCreatorCompletion](images/ARCreatorCompletion.png)
 
 - secondly (optional)
 > you can change the save location of the AR model by selecting the option to change the location of the file before the generation 
 
+![ARCreatorChangeLocation](images/ARCreatorLocation.png)
 
  2 - AR Viewer
  
@@ -45,6 +46,12 @@ a macOS app that creates AR models using apple object capture API (Photogrammetr
 | .usd |
 | .sceneKitScene |
 
+
+### additional resources 
+> in that link there are a group of images you can test to create AR models from it 
+
+
+https://developer.apple.com/augmented-reality/object-capture/
 
 
 ---
