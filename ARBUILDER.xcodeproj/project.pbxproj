@@ -11,12 +11,11 @@
 		57149D8729900323006FF2AB /* ARCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57149D8629900323006FF2AB /* ARCreatorViewModel.swift */; };
 		576DA7E42991CA7300202BD1 /* FileSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576DA7E32991CA7300202BD1 /* FileSelectorViewModel.swift */; };
 		579041B929A550D600B9B701 /* Reality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579041B829A550D600B9B701 /* Reality.swift */; };
-		57C0192229B5365200743ADB /* FileLocationChangeSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C0192129B5365200743ADB /* FileLocationChangeSubView.swift */; };
 		57D39ACD299D1FF400EF85B2 /* SidebarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D39ACC299D1FF400EF85B2 /* SidebarNavigation.swift */; };
 		57D39AD4299D31B700EF85B2 /* ARViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D39AD3299D31B700EF85B2 /* ARViewerView.swift */; };
 		57D39AD8299D323C00EF85B2 /* ARViewerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D39AD7299D323C00EF85B2 /* ARViewerViewModel.swift */; };
 		57DBEBDE2993FF2A00222DD1 /* GeneratorButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DBEBDD2993FF2A00222DD1 /* GeneratorButtonView.swift */; };
-		57F7C1CF298E8798007D8087 /* ARBUILDERApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C1CE298E8798007D8087 /* ARBUILDERApp.swift */; };
+		57F7C1CF298E8798007D8087 /* ARBuilderMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C1CE298E8798007D8087 /* ARBuilderMain.swift */; };
 		57F7C1D1298E8798007D8087 /* ARCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7C1D0298E8798007D8087 /* ARCreatorView.swift */; };
 		57F7C1D3298E8799007D8087 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57F7C1D2298E8799007D8087 /* Assets.xcassets */; };
 		57F7C1D6298E8799007D8087 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57F7C1D5298E8799007D8087 /* Preview Assets.xcassets */; };
@@ -51,13 +50,12 @@
 		57149D8629900323006FF2AB /* ARCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCreatorViewModel.swift; sourceTree = "<group>"; };
 		576DA7E32991CA7300202BD1 /* FileSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSelectorViewModel.swift; sourceTree = "<group>"; };
 		579041B829A550D600B9B701 /* Reality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality.swift; sourceTree = "<group>"; };
-		57C0192129B5365200743ADB /* FileLocationChangeSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocationChangeSubView.swift; sourceTree = "<group>"; };
 		57D39ACC299D1FF400EF85B2 /* SidebarNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarNavigation.swift; sourceTree = "<group>"; };
 		57D39AD3299D31B700EF85B2 /* ARViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewerView.swift; sourceTree = "<group>"; };
 		57D39AD7299D323C00EF85B2 /* ARViewerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewerViewModel.swift; sourceTree = "<group>"; };
 		57DBEBDD2993FF2A00222DD1 /* GeneratorButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorButtonView.swift; sourceTree = "<group>"; };
 		57F7C1CB298E8798007D8087 /* ARBUILDER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARBUILDER.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		57F7C1CE298E8798007D8087 /* ARBUILDERApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBUILDERApp.swift; sourceTree = "<group>"; };
+		57F7C1CE298E8798007D8087 /* ARBuilderMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBuilderMain.swift; sourceTree = "<group>"; };
 		57F7C1D0298E8798007D8087 /* ARCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCreatorView.swift; sourceTree = "<group>"; };
 		57F7C1D2298E8799007D8087 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57F7C1D5298E8799007D8087 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 			children = (
 				57F7C1FD298E9254007D8087 /* FileSelectorSubView.swift */,
 				57F7C1FF298E92A9007D8087 /* TitleSubView.swift */,
-				57C0192129B5365200743ADB /* FileLocationChangeSubView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +158,7 @@
 		57D39ACF299D2DB200EF85B2 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				57F7C1CE298E8798007D8087 /* ARBuilderMain.swift */,
 				57D39AD2299D319D00EF85B2 /* ARViewer */,
 				57F7C1FC298E91FA007D8087 /* FileSelectorSubViews */,
 				57149D832990026D006FF2AB /* ARCreatorView */,
@@ -230,7 +228,6 @@
 				57D39ACF299D2DB200EF85B2 /* Scenes */,
 				57D39AD0299D2E7B00EF85B2 /* Helper */,
 				57F7C201298E930F007D8087 /* Extension */,
-				57F7C1CE298E8798007D8087 /* ARBUILDERApp.swift */,
 				57F7C1D2298E8799007D8087 /* Assets.xcassets */,
 				57F7C1D7298E8799007D8087 /* ARBUILDER.entitlements */,
 				57F7C1D4298E8799007D8087 /* Preview Content */,
@@ -426,11 +423,10 @@
 				576DA7E42991CA7300202BD1 /* FileSelectorViewModel.swift in Sources */,
 				57F7C203298E9324007D8087 /* GradientExtension.swift in Sources */,
 				57F7C1FB298E9021007D8087 /* FileSelector.swift in Sources */,
-				57C0192229B5365200743ADB /* FileLocationChangeSubView.swift in Sources */,
 				57F7C1FE298E9254007D8087 /* FileSelectorSubView.swift in Sources */,
 				57D39ACD299D1FF400EF85B2 /* SidebarNavigation.swift in Sources */,
 				57F7C200298E92A9007D8087 /* TitleSubView.swift in Sources */,
-				57F7C1CF298E8798007D8087 /* ARBUILDERApp.swift in Sources */,
+				57F7C1CF298E8798007D8087 /* ARBuilderMain.swift in Sources */,
 				57149D8729900323006FF2AB /* ARCreatorViewModel.swift in Sources */,
 				579041B929A550D600B9B701 /* Reality.swift in Sources */,
 			);
@@ -576,6 +572,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -588,6 +585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ARBUILDER/ARBUILDER.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -615,6 +613,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ARBUILDER/ARBUILDER.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

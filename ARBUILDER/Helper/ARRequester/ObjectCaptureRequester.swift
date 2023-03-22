@@ -23,7 +23,7 @@ struct ObjectCaptureRequester:ObjectCaputureRequesterProtocol{
                     switch output {
                         case .processingComplete:
                             // RealityKit has processed all requests.
-                        completion(nil,"Model Created Successfully")
+                        completion(0.0,"Model Created Successfully")
                         print("")
 
                         case .requestError(let request, let error):
@@ -38,7 +38,7 @@ struct ObjectCaptureRequester:ObjectCaputureRequesterProtocol{
                             // Periodic progress update. Update UI here.
                         print("request done with \(request)")
                         completion(fractionComplete,nil)
-                        print("")
+                        print("percantage == \(fractionComplete)")
 
                     case .inputComplete: break
                             // Ingestion of images is complete and processing begins.
