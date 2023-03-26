@@ -10,7 +10,7 @@ import SceneKit
 import RealityKit
 import UniformTypeIdentifiers
 struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
-    @StateObject var fileSelectorVM:FileSelectorViewModel
+    @ObservedObject var fileSelectorVM:FileSelectorViewModel
     @State var fileLocation:String = ""
     @State var showAlert:Bool = false
     @StateObject var viewVM:VM
