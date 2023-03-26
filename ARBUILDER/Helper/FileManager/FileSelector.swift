@@ -8,7 +8,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
 enum FileType{
-    case image
     case file
     case folder
 }
@@ -19,7 +18,7 @@ class FileSelectorDependecy:FileSelectorDProtocol{
     
     private let myFileOpener = NSOpenPanel()
     private let typeOfFile:FileType!
-    var fileExtension:UTType = .usdz
+    private var fileExtension:UTType = .usdz
     init(fType:FileType){
         typeOfFile = fType
         myFileOpener.worksWhenModal = true
@@ -31,9 +30,6 @@ class FileSelectorDependecy:FileSelectorDProtocol{
             myFileOpener.allowedContentTypes = [.usdz,.realityFile,.usd,.sceneKitScene]
             myFileOpener.canChooseFiles = true
             myFileOpener.canChooseDirectories = false
-
-        case .image:
-                myFileOpener.allowedContentTypes = [.png,.jpeg,.gif,.bmp]
         default:
             myFileOpener.prompt = "Select Folder"
             myFileOpener.canChooseDirectories = true

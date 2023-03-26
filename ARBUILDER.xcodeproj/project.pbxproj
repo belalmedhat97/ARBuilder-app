@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		57149D82298FFC55006FF2AB /* ObjectCaptureRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57149D81298FFC55006FF2AB /* ObjectCaptureRequester.swift */; };
 		57149D8729900323006FF2AB /* ARCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57149D8629900323006FF2AB /* ARCreatorViewModel.swift */; };
+		5726E92B29CE8B8E00B50DFB /* ARCreatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5726E92A29CE8B8E00B50DFB /* ARCreatorExtension.swift */; };
 		576DA7E42991CA7300202BD1 /* FileSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576DA7E32991CA7300202BD1 /* FileSelectorViewModel.swift */; };
 		579041B929A550D600B9B701 /* Reality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579041B829A550D600B9B701 /* Reality.swift */; };
 		57D39ACD299D1FF400EF85B2 /* SidebarNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D39ACC299D1FF400EF85B2 /* SidebarNavigation.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		57149D81298FFC55006FF2AB /* ObjectCaptureRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCaptureRequester.swift; sourceTree = "<group>"; };
 		57149D8629900323006FF2AB /* ARCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCreatorViewModel.swift; sourceTree = "<group>"; };
+		5726E92A29CE8B8E00B50DFB /* ARCreatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCreatorExtension.swift; sourceTree = "<group>"; };
 		576DA7E32991CA7300202BD1 /* FileSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSelectorViewModel.swift; sourceTree = "<group>"; };
 		579041B829A550D600B9B701 /* Reality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality.swift; sourceTree = "<group>"; };
 		57D39ACC299D1FF400EF85B2 /* SidebarNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarNavigation.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				57F7C1D0298E8798007D8087 /* ARCreatorView.swift */,
+				5726E92A29CE8B8E00B50DFB /* ARCreatorExtension.swift */,
 				57DBEBDD2993FF2A00222DD1 /* GeneratorButtonView.swift */,
 			);
 			path = View;
@@ -420,6 +423,7 @@
 				57DBEBDE2993FF2A00222DD1 /* GeneratorButtonView.swift in Sources */,
 				57D39AD8299D323C00EF85B2 /* ARViewerViewModel.swift in Sources */,
 				57149D82298FFC55006FF2AB /* ObjectCaptureRequester.swift in Sources */,
+				5726E92B29CE8B8E00B50DFB /* ARCreatorExtension.swift in Sources */,
 				576DA7E42991CA7300202BD1 /* FileSelectorViewModel.swift in Sources */,
 				57F7C203298E9324007D8087 /* GradientExtension.swift in Sources */,
 				57F7C1FB298E9021007D8087 /* FileSelector.swift in Sources */,

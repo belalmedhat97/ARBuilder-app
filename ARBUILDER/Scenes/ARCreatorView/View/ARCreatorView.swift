@@ -10,8 +10,8 @@ import SceneKit
 import RealityKit
 struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
     
-    @StateObject var fileSelectorVM:FileSelectorViewModel
-    @StateObject var fileChangeLocationVM:FileSelectorViewModel
+    @ObservedObject var fileSelectorVM:FileSelectorViewModel
+    @ObservedObject var fileChangeLocationVM:FileSelectorViewModel
     @State var fileLocation:String = ""
     @State var fileSaveLocation:String = ""
     @State var changeDestination:Bool = false
@@ -46,14 +46,7 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
                         
                         
                         Button {
-                            if fileSelectorVM.fileLocation != "" && generateButtonTxt == "Generate" {
-                                if changeDestination {
-                                    changeDestination.toggle()
-                                }
-                                hideChangeLocationView = true
-                                viewVM.generate3DObject(file: fileSelectorVM.fileLocation, suggestedFileName: "NewObject", savedLocation: fileSaveLocation == "" ? fileSelectorVM.fileLocation:fileSaveLocation)
-
-                            }
+                            pressGenerate()
                         } label: {
                             ZStack(alignment:.leading){
 
@@ -80,28 +73,13 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
 
                 }
             }.frame(width: geo.size.width,height: geo.size.height,alignment: .center).onChange(of: viewVM.percantage) { newValue in
-                print("percantage value")
-                let progress = Int((newValue/1)*100)
-                generateButtonTxt = "\(progress) % Loading"
-                if progress == 100 {
-                    generateButtonTxt = "Completed"
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5){
-                        generateButtonTxt = "Generate"
-                    }
-
-                }
+                addLoadingPercantageToGenerateBtn(percantage:newValue)
             }
         }
         .background(LinearGradient.gradientColor).onAppear(){
             viewVM.setCameraNode()
-            if viewVM.percantage != 0.0 {
-                let progress = Int((viewVM.percantage/1)*100)
-                generateButtonTxt = "\(progress) % Loading"
-            }
-            if viewVM.didFileSaved == false  {
-                hideChangeLocationView = true
-
-            }
+            isModelCreationInProgress()
+            isModelGenerated()
         }.alert(viewVM.message, isPresented: $viewVM.showAlert) {
             // add buttons here
             Button("OK", role: .cancel) {
@@ -115,14 +93,6 @@ struct ARCreatorView<VM>: View where VM:ARCreatorViewModelProtocol {
             hideChangeLocationView = false
         }
     }
-    func photoGrammertyEnabled() -> Bool {
-        guard PhotogrammetrySession.isSupported else {
-            return false
-            // Inform user and don't proceed with reconstruction.
-        }
-        return true
-    }
-
 }
 
 struct ARCreatorView_Previews: PreviewProvider {
