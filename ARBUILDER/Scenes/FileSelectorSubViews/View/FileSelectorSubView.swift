@@ -44,7 +44,7 @@ struct fileSelectorSubView<VM>: View where VM:FileSelectorViewModel{
 
 struct fileAdderSubView_Previews: PreviewProvider {
     static var previews: some View {
-        fileSelectorSubView(fileLocation: .constant(""), fileFormat: .constant(.usdz), fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder)))
+        fileSelectorSubView(fileLocation: .constant(""), fileFormat: .constant(.usdz), fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelector(fType: .folder)))
     }
 }
 

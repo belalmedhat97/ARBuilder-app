@@ -10,7 +10,7 @@ import SceneKit
 import UniformTypeIdentifiers
 protocol ARViewerViewModelProtocol:ObservableObject{
     
-    var didPressLoad:Bool {get set}
+    var willSetARView:Bool {get set}
     var scene:SCNScene {get set}
     var cameraNode:SCNNode? {get set}
     func readSavedARModel(fileLocation:String,type:UTType)
@@ -19,7 +19,7 @@ protocol ARViewerViewModelProtocol:ObservableObject{
 
 class ARViewerViewModel:NSObject, ARViewerViewModelProtocol{
         
-   @Published var didPressLoad: Bool = false
+   @Published var willSetARView: Bool = false
    @Published var scene: SCNScene = SCNScene()
    @Published var cameraNode: SCNNode?
     override init() {
@@ -27,20 +27,25 @@ class ARViewerViewModel:NSObject, ARViewerViewModelProtocol{
     
     func readSavedARModel(fileLocation:String,type:UTType) {
         DispatchQueue.main.async {
-            do{
                 if type != .realityFile {
-                    let loadedScene = try SCNScene(url: URL(string: "\(fileLocation)")!)
-                    loadedScene.background.contents = NSColor.white
-                    self.scene = loadedScene
+                    self.setSceneKitModel(location: fileLocation)
                 } else {
-                    self.didPressLoad = true
+                    self.willSetARView = true
                 }
-            }catch let error{
-                print(error.localizedDescription)
-            }
         }
     }
     func setCameraNode(){
         self.scene.rootNode.childNode(withName: "camera", recursively: false)
+    }
+    
+    private func setSceneKitModel(location:String){
+        do {
+            let loadedScene = try SCNScene(url: URL(string: "\(location)")!)
+            loadedScene.background.contents = NSColor.white
+            self.scene = loadedScene
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
     }
 }
