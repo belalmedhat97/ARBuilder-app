@@ -43,7 +43,7 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
                             ZStack(){
                                 if fileSelectorVM.fileLocation != "" {
                                     if fileSelectorVM.fileFormat == .realityFile {
-                                        ARViewContainer(url: fileSelectorVM.fileLocation, didPressLoad: $viewVM.didPressLoad, viewDidDisapper: $viewDidDisappear).ignoresSafeArea()
+                                        ARViewContainer(url: fileSelectorVM.fileLocation, didPressLoad: $viewVM.willSetARView, viewDidDisapper: $viewDidDisappear).ignoresSafeArea()
                                     }else{
                                         SceneView(
                                             scene: viewVM.scene,
@@ -86,7 +86,7 @@ struct ARViewerView<VM>: View where VM:ARViewerViewModelProtocol {
 
 struct ARViewerView_Previews: PreviewProvider {
     static var previews: some View {
-        ARViewerView(fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder)), viewVM: ARViewerViewModel())
+        ARViewerView(fileSelectorVM: FileSelectorViewModel(panelRequesterManager: FileSelector(fType: .folder)), viewVM: ARViewerViewModel())
     }
 }
 

@@ -58,6 +58,8 @@ import SceneKit
              scene = try SCNScene(url: URL(string: "\(fileSavedLocation == "" ? fileLocation:fileSavedLocation)/NewObject.usdz")!)
          }catch let error{
              print(error.localizedDescription)
+             self.message = "problem happen when showing the model"
+             self.showAlert = true
          }
      }
      

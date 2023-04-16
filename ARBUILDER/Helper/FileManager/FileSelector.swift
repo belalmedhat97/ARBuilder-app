@@ -7,19 +7,19 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
-enum FileType{
+enum SelectionType{
     case file
     case folder
 }
-protocol FileSelectorDProtocol{
+protocol FileSelectorProtocol{
     func pickFile(completion:@escaping(_ filePath:String, _ fileForamt: UTType?)->())
 }
-class FileSelectorDependecy:FileSelectorDProtocol{
+class FileSelector:FileSelectorProtocol{
     
     private let myFileOpener = NSOpenPanel()
-    private let typeOfFile:FileType!
+    private let typeOfFile:SelectionType!
     private var fileExtension:UTType = .usdz
-    init(fType:FileType){
+    init(fType:SelectionType){
         typeOfFile = fType
         myFileOpener.worksWhenModal = true
         myFileOpener.allowsMultipleSelection = false
@@ -64,6 +64,36 @@ class FileSelectorDependecy:FileSelectorDProtocol{
         
         
     }
+    deinit {
+        print("release memory")
+    }
+    
+}
+class FileSelectorMock:FileSelectorProtocol{
+    private let typeOfFile:SelectionType!
+    private var fileExtension:UTType = .usdz
+    private var fileURL:URL!
+    init(fType:SelectionType,filePath:URL){
+        typeOfFile = fType
+        fileURL = filePath
+    }
+    func pickFile(completion:@escaping(_ filePath:String, _ fileForamt: UTType?)->()) {
+        if typeOfFile == .file {
+            if let fileType = UTType(filenameExtension: fileURL?.pathExtension ?? "") {
+                self.fileExtension = fileType
+                completion(fileURL?.path ?? "", self.fileExtension)
+            }else{
+                completion(fileURL?.path ?? "", nil)
+            }
+        } else {
+            completion(fileURL?.path ?? "", nil)
+
+        }
+
+        
+        
+    }
+    
     deinit {
         print("release memory")
     }

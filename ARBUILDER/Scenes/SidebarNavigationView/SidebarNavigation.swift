@@ -17,9 +17,9 @@ struct SidebarNavigation: View {
     @State var selection = Set<screenType>()
     var viewerVM = ARViewerViewModel()
     var creatorVM = ARCreatorViewModel(objectRequesterManager: ObjectCaptureRequester())
-    @StateObject var fileSelectorVMFile = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .file))
-    @StateObject var fileSelectorVMFolder = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder))
-    @StateObject var fileSelectorChangeLocationVM = FileSelectorViewModel(panelRequesterManager: FileSelectorDependecy(fType: .folder))
+    @StateObject var fileSelectorVMFile = FileSelectorViewModel(panelRequesterManager: FileSelector(fType: .file))
+    @StateObject var fileSelectorVMFolder = FileSelectorViewModel(panelRequesterManager: FileSelector(fType: .folder))
+    @StateObject var fileSelectorChangeLocationVM = FileSelectorViewModel(panelRequesterManager: FileSelector(fType: .folder))
 
 
     var body: some View {
