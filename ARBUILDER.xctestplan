@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "4BEFC4CE-EB6D-4EAD-99B3-C5EC523D7C79",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:ARBUILDER.xcodeproj",
+      "identifier" : "57F7C1CA298E8798007D8087",
+      "name" : "ARBUILDER"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:ARBUILDER.xcodeproj",
+        "identifier" : "57F7C1DB298E8799007D8087",
+        "name" : "ARBUILDERTests"
+      }
+    }
+  ],
+  "version" : 1
+}

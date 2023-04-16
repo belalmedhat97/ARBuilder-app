@@ -15,8 +15,8 @@ protocol FileSelectorViewModelProtocol:ObservableObject{
 class FileSelectorViewModel:FileSelectorViewModelProtocol{
     @Published var fileLocation:String = ""
     @Published var fileFormat:UTType?
-    @Published var panelRequesterManager:(any FileSelectorDProtocol)?
-    init(panelRequesterManager: (any FileSelectorDProtocol)? = nil) {
+    private let panelRequesterManager:(any FileSelectorProtocol)?
+    init(panelRequesterManager: (any FileSelectorProtocol)? = nil) {
         self.panelRequesterManager = panelRequesterManager
     }
     func requestOpenPanel() {
